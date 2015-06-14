@@ -20,9 +20,7 @@ hrApp.config(function($routeProvider){
         })
 		.otherwise({
 			redirectTo: '/'
-		});
-	
-
+		});	
 });
 
 

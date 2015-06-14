@@ -46,7 +46,7 @@
 				</form>
 			</div>
 	</div>
-	<div >
+	<div >	             
 	<table class="table table-striped">
         <thead>
             <tr>
@@ -72,6 +72,7 @@
         </tbody>
         
      </table>
+     	    <div ng-show="loader.loading" class="loading"><img src="loading_spinner.gif" /></div>
      		<br />
-             <h2 ng-show="!(empList | filter:employee).length" class="text-center">No Records to Show</h2>
+             <h2 ng-show="!(empList | filter:employee).length" class="text-center" id="noRec">No Records to Show</h2>
     </div>

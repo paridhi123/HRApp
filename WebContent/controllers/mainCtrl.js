@@ -1,5 +1,10 @@
 hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeService', 'employeeApiService', '$cookieStore', '$rootScope', 'empDetailsService', function($scope, $location, $http, employeeService, employeeApiService, $cookieStore, $rootScope, empDetailsService){
 	
+	// initialize the loading indicator
+	$scope.loader = { 
+			loading : false,
+	};
+	
 	/* check if the cookie value is not undefined, then get the log in user's details from the cookie
 	 * display the logged in user name on the main screen */
 	if($cookieStore.get('user') !== undefined){
@@ -29,7 +34,11 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
 	      and move the code to a separate service in the production application since we would
 	      not have to simulate the end of pagination scroll */
 	$scope.LoadDetails = function(){
-		$http({
+	 	 // start loading spinner while waiting for the data to be fetched from the server
+	 	 $scope.loader.loading = true;
+		 $('#noRec').addClass('noDisplay');
+	 	 
+	 	 $http({
 	        method: "get",
 	        url: "http://private-62ba2-empdirectory1.apiary-mock.com/employee/1",
 	        params: {
@@ -43,10 +52,14 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
 	 	   console.log("Page Number from the scroll: " + _page);	 	  
 	 	   
 	 	   // For stopping the infinite scroll (simulating the end of the fetched data)
-	 	   if(data[_page].id > 4){
+	 	   if(data[_page].id > 3){
 	 	   $scope.busyLoadingData = true;
+
 	 	   }
 	 	   
+	 	  // stop loading indicator when data is fetched successfully 
+	 	  $scope.loader.loading = false ;
+		  $('#noRec').removeClass('noDisplay'); 
 	    });
 	};
  
@@ -95,7 +108,7 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
     	
     	employeeApiService.addEmployee($scope.newEmployee);
     };
-
+    
     /* Edit screen changes 
      * 1. Watch for changes on the empSelected model which denotes the model for edit employee details
      * */
@@ -117,12 +130,28 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
 	};
 	
 
+    /* Reset the input values in the Add Employee Form 
+     * And return the form to its "pristine" state
+     * */
+    $scope.reset = function(){
+    	$('#empName').val('');
+    	$('#empEmail').val('');
+    	$('#empTitle').val('');
+    	$('#empLocation').val('');
+    	$('#empMobile').val('');
+    	$('#empWork').val('');
+    	$('#empHome').val('');
+    	$scope.addEmpForm.$setPristine();
+    };
+    
+
 	// closes the sliding Add Employee Menu from the main Screen
 	$scope.closeAddMenu = function(){
 		if($('.add').html() == 'Close'){
 			$('.add').html('Add New Employee');
 			$('.newAddBtn').html('Add');	
 		}
+		$scope.reset();
 	};
 
 }]);

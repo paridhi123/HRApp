@@ -1,16 +1,14 @@
 <h2>User Login</h2>
 <br/>
+<!-- Login form: username/password is admin for HR login -->
 <form ng-submit="login()" class="ng-scope ng-pristine ng-valid">
   <label>User name</label>
   <input type="text" ng-model="username" class="ng-pristine ng-valid">
   <label>Password</label>
   <input type="password" ng-model="password" class="ng-pristine ng-valid"> 
-
-
   
   <br/><br/>
  {{loginError}}  
   <br/><br/>
   <button class="btn btn-primary">Sign In</button>
-<!--  <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
 </form> 

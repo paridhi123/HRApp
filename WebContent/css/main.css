@@ -1,0 +1,58 @@
+input.nameField{
+	display: inline-block;
+	width: 80%;
+	margin-right: 8px;
+}
+::-webkit-input-placeholder {
+   color: #BBBBBB !important;
+   font-size:16px;
+   font-style: italic;
+}
+div.heading{
+	font-size: 26px; 
+	font-weight: bold;
+	margin-left: 100px;
+    margin-top: 2px;
+}
+.home, .signin, .heading, .nameField{
+	display: inline-block;
+}
+
+div.wrapper{  
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+.add{
+  margin-top: 10px;
+}
+div#openMenu{
+	width:800px;
+	float: right;
+	margin-right: 170px;
+}
+.slideDownTable{
+	border-bottom: 2px solid #cccccc;
+}
+.editDiv{
+	width:870px !important;
+	float: left !important;
+	margin-left: 120px !important;
+}
+form[novalidate] input{
+	border-left-width: 8px;
+	border-color: #3498db;
+	border-style: colid;
+}
+form[required].ng-pristine{
+	border-color: #e74c3c;
+}
+input.ng-invalid.ng-dirty{
+	border-color: #e74c3c;
+}
+input.ng-valid.ng-dirty{
+	border-color: #2ecc71;
+}
+.reqField{
+  margin-bottom: 8px;
+  margin-top: 4px;
+}

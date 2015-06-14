@@ -1,0 +1,38 @@
+<h3>Edit Employee Details</h3><br />
+<div id="openMenu" class="editDiv" >
+<form name="addEmpForm" ng-submit="addEmpSubmit()" novalidate>
+				<table class="table">
+					<tr>
+						<td>** Edit Name: </td>
+						<td><input type="text" ng-model="empSelected.name" ng-value="empSelected.name" id="empNameEdit" class="form-control" required /></td>
+						<td>&nbsp;&nbsp;** Edit Email: </td>
+						<td><input type="text" ng-model="empSelected.email" ng-value="empSelected.email" id="empEmailEdit" class="form-control" required /></td>
+					</tr>
+					<tr>
+						<td>** Edit Title: </td>
+						<td><input type="text" ng-model="empSelected.title" ng-value="empSelected.title" id="empTitleEdit"  class="form-control" required /></td>
+						<td>&nbsp;&nbsp;** Edit Location:</td>
+						<td><input type="text" ng-model="empSelected.location" ng-value="empSelected.location" id="empLocationEdit"  class="form-control" required /></td>
+					</tr>
+					<tr>
+						<td>** Edit Phone [Cell]: </td>
+						<td><input type="text" ng-model="empSelected.phone[0].number" ng-value="empSelected.phone[0].number" id="empMobileEdit"  class="form-control" required /></td>
+						<td>&nbsp;&nbsp;Edit Phone [Home]:&nbsp;</td>
+						<td><input type="text" ng-model="empSelected.phone[1].number" ng-value="empSelected.phone[1].number" id="empHomeEdit"  class="form-control" /></td>
+					</tr>
+					<tr>
+						<td>Edit Phone [Work]:</td>
+						<td><input type="text" ng-model="empSelected.phone[2].number"  ng-value="empSelected.phone[2].number" id="empWorkEdit"  class="form-control" /></td>
+						<td></td>
+						<td>
+						<div class="reqField">** Required Fields</div>
+						<a href="#/"class="btn btn-primary newAddBtn"  ng-model="empSelected"  ng-click="updateEmployee(empSelected)" ng-disabled="addEmpForm.$invalid" >Edit Employee</a>
+						<a href="#/"class="btn btn-primary newAddBtn" >Cancel</a>
+						<!-- ng-click="editScreen(employee)"
+						<button class="btn btn-primary newAddBtn" ng-click="editEmpSubmit(this)">Edit Employee</button>  -->
+						
+						</td>
+					</tr>
+				</table>
+				</form>
+</div>

@@ -1,0 +1,77 @@
+<div ng-if="LoggedRole == 'hr'">Hello {{LoggedUser}}</div> 
+<div class="row">
+
+	<div class="col-md-6 col-md-offset-3 wrapper">
+	
+	<form ng-submit="submit('#/details')">
+		<div class="form-group">
+		<input type="text" class="form-control nameField" ng-model="employee" placeholder="name, email, title or location of the employee"/>
+		<a href="#/details" class="btn btn-primary">Get Details</a> 
+		</div>
+	</form>
+	</div>
+			<button slide-toggle="#openMenu" class="btn btn-primary add" ng-if="LoggedRole == 'hr'" ng-click="closeAddMenu()">Add New Employee</button> 
+			<div id="openMenu" class="slideable" >
+			<form name="addEmpForm" ng-submit="addEmpSubmit()" novalidate>
+				<table class="slideDownTable table">
+					<tr>
+						<td>** Name: </td>
+						<td><input type="text" ng-model="empName" id="empName" name="empName" class="form-control" required /></td>
+						<td>&nbsp;&nbsp;** Email:</td>
+						<td><input type="email" ng-model="empEmail" id="empEmail" class="form-control" required /></td>
+					</tr>
+					<tr>
+						<td>** Title: </td>
+						<td><input type="text" ng-model="empTitle" id="empTitle"  class="form-control" required /></td>
+						<td>&nbsp;&nbsp;** Location:</td>
+						<td><input type="text" ng-model="empLocation" id="empLocation"  class="form-control" required /></td>
+					</tr>
+					<tr>
+						<td>** Phone [Cell]: </td>
+						<td><input type="text" ng-model="empMobile" id="empMobile"  class="form-control" required /></td>
+						<td>&nbsp;&nbsp;Phone [Home]:&nbsp;</td>
+						<td><input type="text" ng-model="empHome" id="empHome"  class="form-control" /></td>
+					</tr>
+					<tr>
+						<td>Phone [Work]:</td>
+						<td><input type="text" ng-model="empWork" id="empWork"  class="form-control" /></td>
+						<td></td>
+						<td>
+						<div class="reqField">** Required Fields</div>
+						<button class="btn btn-primary newAddBtn" ng-disabled="addEmpForm.$invalid" >Add</button>
+
+						</td>
+					</tr>
+				</table>
+				</form>
+			</div>
+	</div>
+	<div >
+	<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Emp ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Job Title</th>
+                <th>Location</th>
+                <th class="last-column">Phone</th>
+            </tr>
+        </thead>
+        <tbody  id="mainBody"  infinite-scroll="LoadDetails()" infinite-scroll-distance="0" infinite-scroll-disabled='busyLoadingData'>
+        <tr ng-repeat="employee in empList | filter:employee" >
+                <td>{{employee.id}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.title}}</td>
+                <td>{{employee.location}}</td>
+                <td><ul><li ng-repeat="entry in employee.phone">{{entry.type}}:  {{entry.number}}</li></ul></td>
+                <td ng-if="LoggedRole == 'hr'"><a href="#/edit" ng-model="empSelected" ng-click="editScreen(employee)">Edit</a> | <a href="#/" ng-click="removeEmp(employee.id)">Delete</a></td>
+        </tr>
+
+        </tbody>
+        
+     </table>
+     		<br />
+             <h2 ng-show="!(empList | filter:employee).length" class="text-center">No Records to Show</h2>
+    </div>

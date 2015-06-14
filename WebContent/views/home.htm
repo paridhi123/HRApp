@@ -10,6 +10,7 @@
 		</div>
 	</form>
 	</div>
+			<!-- Add Employee Form at the top. Resets its state on close and for the demo purpose adds employee record to the DOM  -->
 			<button slide-toggle="#openMenu" class="btn btn-primary add" ng-if="LoggedRole == 'hr'" ng-click="closeAddMenu()">Add New Employee</button> 
 			<div id="openMenu" class="slideable" >
 			<form name="addEmpForm" ng-submit="addEmpSubmit()" novalidate>
@@ -58,6 +59,18 @@
                 <th class="last-column">Phone</th>
             </tr>
         </thead>
+        
+        <!-- I am using the infinite scroll plugin for pagination (or loading huge data) 
+             1. Scrolls infintely over large data
+             2. Loads data page wise
+             3. Server also needs to be configured accordingly
+             4. The infite scroll plugin have been tested to work effeciently with 100K records
+             5. It loads data page wise. But page wise data has to come from server. To simulate the behavior I am just 
+                iterating over the same set of data and loading it every time as a new page.
+             *Note: I did not use traditional pagination because then the "search" and "data filter" would not work as I wanted
+              But if the project requires we can always use the traditional previous next pagination for loading huge data 
+              page wise.  
+         -->
         <tbody  id="mainBody"  infinite-scroll="LoadDetails()" infinite-scroll-distance="0" infinite-scroll-disabled='busyLoadingData'>
         <tr ng-repeat="employee in empList | filter:employee" >
                 <td>{{employee.id}}</td>
@@ -72,7 +85,9 @@
         </tbody>
         
      </table>
+            <!-- Indicator shown while waiting to load data -->
      	    <div ng-show="loader.loading" class="loading"><img src="loading_spinner.gif" /></div>
      		<br />
+     		<!-- Message when no records are available -->
              <h2 ng-show="!(empList | filter:employee).length" class="text-center" id="noRec">No Records to Show</h2>
     </div>

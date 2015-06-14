@@ -1,3 +1,4 @@
+// THIRD PARTY PLUGIN FOR PAGINATION SCROLL
 /* ng-infinite-scroll - v1.0.0 - 2013-02-23 */
 var mod;
 

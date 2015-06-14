@@ -1,13 +1,21 @@
+/* Service for implementations of Delete and Post requests to the server.
+ * These requests are simulated for demo purposes. The service can be injected in any of the controllers
+ * through dependency injection and the respective functions can be called.
+ * */
 hrApp.service('employeeApiService', function($http){
 	console.log('inside the employee API service');
 	 return({
          removeEmployee: removeEmployee,
-         addEmployee: addEmployee,
-         updateEmployeeDetails: updateEmployeeDetails
+         addEmployee: addEmployee
      });
 	 
+	 /* Implementation of the delete request. In the actual implementation the server must be configured to accept
+	  * the employee details like name or ID, match them in the database and delete the entry and send a fresh list back 
+	  * to the client. 
+	  * Here I have just simulated Delete request by returning a success status code to demo the working.
+	  * If the call goes through, the client receives a Response status code of 204.
+	  * */
 	 function removeEmployee(id) {
-
          var request = $http({
              method: "delete",
              url: "http://private-62ba2-empdirectory1.apiary-mock.com/employee/1",
@@ -18,14 +26,16 @@ hrApp.service('employeeApiService', function($http){
                  id: id
              }
          });
-         return( request.then( function(){console.log("success delete");}, function(){console.log("failure delete");} ) );
-
-//         return( request.then( handleSuccess, handleError ) );
-
+         return( request.then( function(response){console.log("Success Delete with Status: " + response.status);}, function(){console.log("failure delete");} ) );
      };
-	 
+     
+	 /* Implementation of the post request. In the actual implementation the server must be configured to accept
+	  * the employee details like name or ID, Add/Update the entry and send a fresh list back to the client. 
+	  * Here I have just simulated the Add/Edit request by returning a success status code to demo the working.
+	  * If the call goes through, the client receives a Response status code of 201.
+	  * */
 	 function addEmployee(newEmp) {
-		 console.log('inside addEmployee ' + JSON.stringify(newEmp));
+		 console.log('Inside addEmployee > employee to be added or updated:  ' + JSON.stringify(newEmp));
 		 var request = $http({
 		 method: "post",
 		 url: "http://private-62ba2-empdirectory1.apiary-mock.com/employee/1",
@@ -52,39 +62,8 @@ hrApp.service('employeeApiService', function($http){
 		 }
 		 });
 		  
-		 return( request.then( function(){console.log("success post");}, function(){console.log("failure post");} ) );
+		 return( request.then( function(response){console.log("Success Post with Status: " + response.status);}, function(){console.log("failure post");} ) );
  
-		 };
-		 
-		 function updateEmployeeDetails(uEmp){
-			 var request = $http({
-				 method: "post",
-				 url: "http://private-62ba2-empdirectory1.apiary-mock.com/employee/1",
-				 params: {
-				 action: "add"
-				 },
-				 data: {  
-				        "id":uEmp.id,
-				        "name": uEmp.name,
-				        "title": uEmp.title,
-				        "location": uEmp.location,
-				        "email": uEmp.email,
-				        "phone": [
-				            {
-				                "type": uEmp.phone[0].type,
-				                "number": uEmp.phone[0].number
-				            }, {
-				            	"type": uEmp.phone[1].type,
-				                "number": uEmp.phone[1].number
-				            }, {
-				            	"type": uEmp.phone[2].type,
-				                "number": uEmp.phone[2].number
-				            }]
-				 }
-				 });
-				  
-				 return( request.then( function(){console.log("success edit post");}, function(){console.log("failure edit post");} ) );
-		 
-		 }
+		 };		 
 	 
 });

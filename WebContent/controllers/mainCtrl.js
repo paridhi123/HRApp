@@ -63,6 +63,7 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
      * and the view will be updated accordingly.
      */
     $scope.addEmpSubmit = function() {
+    	// **START - only for demo > employee being added to the DOM
     	$('.newAddBtn').html('Employee Added');
     	$('.add').html('Close');
     	$scope.newEmployee={};
@@ -90,7 +91,8 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
                 '</ul></td>'+
                 '<td ng-if="LoggedRole == \'hr\'"><a href="#/">Edit</a> | <a href="#/" ng-click="removeEmp(employee.id)">Delete</a></td>'+
         '</tr>');
-
+    	// **END - only for demo > employee being added to the DOM
+    	
     	employeeApiService.addEmployee($scope.newEmployee);
     };
 
@@ -111,7 +113,7 @@ hrApp.controller('mainController', ['$scope', '$location', '$http', 'employeeSer
      * 3. The implementation will copy the values to the edit screen and call a POST request 
      * */
 	$scope.updateEmployee = function(updatedEmployee){
-		employeeApiService.updateEmployeeDetails(updatedEmployee);
+		employeeApiService.addEmployee(updatedEmployee);
 	};
 	
 

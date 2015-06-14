@@ -1,3 +1,10 @@
+/* 1. This is a slideable menu directives. "slideable" is a class that gets attached to the div that 
+ *    needs to be shown and hidden with the animation effect.
+ * 2. "slideToggle" directive is an Atrribute that gets attached to the button/link clicking on which
+ *     the slideable div will expand. The ID of the slideable element is passed as a value to this attribute. 
+ *     The respective element is fetched and the height is set according to the content.
+ * 3. Various css and easing effects are added to the "slideable" element.   
+ * */
 hrApp.directive('slideToggle', function() {
     return {
         restrict: 'A',
